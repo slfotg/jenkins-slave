@@ -25,6 +25,8 @@ RUN useradd -m -d /home/jenkins -s /bin/sh jenkins &&\
     echo "jenkins:jenkins" | chpasswd &&\
     mkdir /home/jenkins/.m2 && chown jenkins:jenkins /home/jenkins/.m2
 
+VOLUME ["/home/jenkins/.m2"]
+
 # Standard SSH port
 EXPOSE 22
 
