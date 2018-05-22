@@ -17,13 +17,17 @@ RUN apt-get update &&\
     add-apt-repository ppa:openjdk-r/ppa &&\
     apt-get -q update &&\
     apt-get -y install openjdk-7-jdk &&\
+    apt-get -y install openjdk-8-jdk &&\
     apt-get -y install maven &&\
     apt-get -y install git
 
 # Set user jenkins to the image
 RUN useradd -m -d /home/jenkins -s /bin/sh jenkins &&\
     echo "jenkins:jenkins" | chpasswd &&\
-    mkdir /home/jenkins/.m2 && chown jenkins:jenkins /home/jenkins/.m2
+    mkdir /home/jenkins/.m2 && chown jenkins:jenkins /home/jenkins/.m2 &&\
+    mkdir /home/jenkins/.ssh && chown jenkins:jenkins /home/jenkins/.ssh
+
+ENV JAVA_HOME /usr/lib/jvm/java-7-openjdk-amd64
 
 VOLUME ["/home/jenkins/.m2", "/home/jenkins/.ssh"]
 
